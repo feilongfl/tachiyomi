@@ -236,14 +236,14 @@ class PagerPageHolder(
     readImageHeaderSubscription = Observable
       .fromCallable {
         val stream = streamFn().buffered(16)
-        openStream = stream
+//        openStream = stream
+        openStream = if (viewer.processor != null) viewer.processor!!.process(stream) else stream
 
         ImageUtil.findImageType(stream) == ImageUtil.ImageType.GIF
       }
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
       .doOnNext { isAnimated ->
-        openStream = if (viewer.processor != null) viewer.processor!!.process(openStream) else openStream
         if (!isAnimated) {
           initSubsamplingImageView().setImage(ImageSource.inputStream(openStream!!))
         } else {
