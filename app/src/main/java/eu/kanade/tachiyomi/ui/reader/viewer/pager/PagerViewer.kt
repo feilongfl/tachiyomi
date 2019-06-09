@@ -37,7 +37,7 @@ abstract class PagerViewer(val activity: ReaderActivity) : BaseViewer {
     /**
      * image processor
      */
-    var processor: Processor? = LoopProcessor()
+    var processor: Processor? = LoopProcessor() //todo fix here later
 
     /**
      * Adapter of the pager.
