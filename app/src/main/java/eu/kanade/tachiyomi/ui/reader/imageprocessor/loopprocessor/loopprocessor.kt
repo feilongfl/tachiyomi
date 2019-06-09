@@ -9,7 +9,11 @@ class LoopProcessor : Processor {
   override val id = "2"
 
   override fun process(stream: InputStream?): InputStream? {
-    return stream
+    if (stream == null) return stream
+
+    val bmp = InputStream2Bitmap(stream)
+
+    return Bitmap2InputStream(bmp)
   }
 
   constructor()
