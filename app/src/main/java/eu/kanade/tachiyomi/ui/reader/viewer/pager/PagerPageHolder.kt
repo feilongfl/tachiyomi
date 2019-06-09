@@ -20,6 +20,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.NoTransition
 import com.davemorrissey.labs.subscaleview.ImageSource
@@ -441,6 +442,7 @@ class PagerPageHolder(
       .skipMemoryCache(true)
       .diskCacheStrategy(DiskCacheStrategy.NONE)
       .transition(DrawableTransitionOptions.with(NoTransition.getFactory()))
+      .apply(RequestOptions)
       .listener(object : RequestListener<Drawable> {
         override fun onLoadFailed(
           e: GlideException?,
