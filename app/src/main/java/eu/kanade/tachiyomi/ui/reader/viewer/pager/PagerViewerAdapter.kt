@@ -3,6 +3,8 @@ package eu.kanade.tachiyomi.ui.reader.viewer.pager
 import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
+import eu.kanade.tachiyomi.ui.reader.imageprocessor.Processor
+import eu.kanade.tachiyomi.ui.reader.imageprocessor.demoprocessor.DemoProcessor
 import eu.kanade.tachiyomi.ui.reader.model.ChapterTransition
 import eu.kanade.tachiyomi.ui.reader.model.ReaderPage
 import eu.kanade.tachiyomi.ui.reader.model.ViewerChapters
@@ -12,7 +14,8 @@ import timber.log.Timber
 /**
  * Pager adapter used by this [viewer] to where [ViewerChapters] updates are posted.
  */
-class PagerViewerAdapter(private val viewer: PagerViewer) : ViewPagerAdapter() {
+class PagerViewerAdapter(private val viewer: PagerViewer) :
+  ViewPagerAdapter() {
 
     /**
      * List of currently set items.

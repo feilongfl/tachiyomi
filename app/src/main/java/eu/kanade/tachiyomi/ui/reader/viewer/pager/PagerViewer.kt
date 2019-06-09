@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup.LayoutParams
 import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.ui.reader.ReaderActivity
+import eu.kanade.tachiyomi.ui.reader.imageprocessor.Processor
+import eu.kanade.tachiyomi.ui.reader.imageprocessor.demoprocessor.DemoProcessor
+import eu.kanade.tachiyomi.ui.reader.imageprocessor.loopprocessor.LoopProcessor
 import eu.kanade.tachiyomi.ui.reader.model.ChapterTransition
 import eu.kanade.tachiyomi.ui.reader.model.ReaderPage
 import eu.kanade.tachiyomi.ui.reader.model.ViewerChapters
@@ -30,6 +33,11 @@ abstract class PagerViewer(val activity: ReaderActivity) : BaseViewer {
      * Configuration used by the pager, like allow taps, scale mode on images, page transitions...
      */
     val config = PagerConfig(this)
+
+    /**
+     * image processor
+     */
+    var processor: Processor? = LoopProcessor()
 
     /**
      * Adapter of the pager.
