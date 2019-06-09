@@ -237,10 +237,13 @@ class PagerPageHolder(
     readImageHeaderSubscription = Observable
       .fromCallable {
         val stream = streamFn().buffered(16)
+        val streamType = ImageUtil.findImageType(stream)
 //        openStream = stream
-        openStream = if (viewer.processor != null) viewer.processor!!.process(stream) else stream
+        if(streamType == ImageUtil.ImageType.GIF)  // ignore dynamic image process, I think it
+                                                   // nessery and may cost lot of calc
+          openStream = if (viewer.processor != null) viewer.processor!!.process(stream) else stream
 
-        ImageUtil.findImageType(stream) == ImageUtil.ImageType.GIF
+        streamType == ImageUtil.ImageType.GIF
       }
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
@@ -442,7 +445,7 @@ class PagerPageHolder(
       .skipMemoryCache(true)
       .diskCacheStrategy(DiskCacheStrategy.NONE)
       .transition(DrawableTransitionOptions.with(NoTransition.getFactory()))
-      .apply(RequestOptions)
+      .apply(RequestOptions())
       .listener(object : RequestListener<Drawable> {
         override fun onLoadFailed(
           e: GlideException?,
